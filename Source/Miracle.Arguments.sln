@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miracle.Arguments", "Miracl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Miracle.Arguments.Test", "Miracle.Arguments.Test\Miracle.Arguments.Test.csproj", "{CD428CC7-C634-4A6A-B16F-52A254B1F791}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{E9621B27-E63D-4007-B97A-C92985918500}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,16 @@ Global
 		{CD428CC7-C634-4A6A-B16F-52A254B1F791}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{CD428CC7-C634-4A6A-B16F-52A254B1F791}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD428CC7-C634-4A6A-B16F-52A254B1F791}.Release|x86.ActiveCfg = Release|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E9621B27-E63D-4007-B97A-C92985918500}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$title$</title>
+		<authors>$author$</authors>
+		<owners>$author$</owners>
+		<projectUrl>https://github.com/PolarbearDK/Miracle.Arguments</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>$description$</description>
+		<releaseNotes>Initial version.</releaseNotes>
+		<copyright>Copyright 2008-2014</copyright>
+		<tags>commandline command line parser argument annotation attribute</tags>
+	</metadata>
+</package>

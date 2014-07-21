@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Reflection;
+using Miracle.Arguments;
 
-namespace Miracle.Arguments.Test.Sample
+namespace Samples
 {
     /// <summary>
     /// Sample argument class that shows examples of most of the functionality of the CommandLineParser.
@@ -9,8 +10,8 @@ namespace Miracle.Arguments.Test.Sample
     [ArgumentSettings(
         ArgumentNameComparison = StringComparison.InvariantCultureIgnoreCase,
         DuplicateArgumentBehaviour = DuplicateArgumentBehaviour.Unknown,
-        StartOfArgument = new[] {'-'},
-        ValueSeparator = new[] {' ','='},
+        StartOfArgument = new[] { '-' },
+        ValueSeparator = new[] { ' ', '=' },
         ShowHelpOnArgumentErrors = false
         )]
     [ArgumentDescription("Sample program that shows most of most of the functionality of the CommandLineParser.")]
@@ -78,7 +79,7 @@ namespace Miracle.Arguments.Test.Sample
             set { _bindingFlags = value; }
         }
 
-        private BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Static;
+        private BindingFlags _bindingFlags = BindingFlags.NonPublic | BindingFlags.Static; // Default valus. Use constructor for 
 
         /// <summary>
         /// A single argument target can specify ArgumentUnknown attribute (must be string array).
@@ -88,9 +89,15 @@ namespace Miracle.Arguments.Test.Sample
         [ArgumentUnknown]
         public string[] UnknownArguments { get; set; }
 
-        [ArgumentCommand(typeof (SourceArgumentClass), "Copy", "CP")]
-        [ArgumentCommand(typeof (MoveArgumentClass), "Move", "MV")]
-        [ArgumentCommand(typeof (DeleteArgumentClass), "Delete", "DEL")]
+        /// <summary>
+        /// Commands are optional arguments that can be specified zero, one or several times. Each command has its on command line parser. 
+        /// Type can be an array which allows several commands, or a non array which indicates zero ore one usage.
+        /// Type can be any type that all command argument types inherit form (object, interface or base class).
+        /// [ArgumentRequired] is supported.
+        /// </summary>
+        [ArgumentCommand(typeof(CopyArgumentClass), "Copy", "CP")]
+        [ArgumentCommand(typeof(MoveArgumentClass), "Move", "MV")]
+        [ArgumentCommand(typeof(DeleteArgumentClass), "Delete", "DEL")]
         public object[] Commands { get; set; }
 
         [ArgumentName("Help", "H", "?")]
@@ -132,4 +139,3 @@ The property name is used as the 'value' name.")]
         public string Source { get; set; }
     }
 }
-
