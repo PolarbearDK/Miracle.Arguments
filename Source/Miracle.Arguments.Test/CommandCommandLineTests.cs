@@ -38,6 +38,12 @@ namespace Miracle.Arguments.Test
             [ArgumentDescription("StringComparison used for string compares. Default is CurrentCultureIgnoreCase.")]
             public StringComparison StringComparison { get; set; }
 
+            [ArgumentPosition(1)]
+            public StringComparison PositionalEnumWithoutDescription { get; set; }
+
+            [ArgumentPosition(2)]
+            public string PositionalStringWithoutDescription { get; set; }
+
             /// <summary>
             /// Commands are optional arguments that can be specified zero, one or several times. Each command has its on command line parser. 
             /// Type can be an array which allows several commands, or a non array which indicates zero ore one usage.
@@ -66,8 +72,12 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
         public class CommandBaseClass
         {
             [ArgumentName("CommonBaseArgument")]
-            [ArgumentDescription("This argument is common for all commands")]
+            [ArgumentDescription("This named argument is common for all commands")]
             public string SomeCommonArgument { get; set; }
+
+            [ArgumentPosition(100)]
+            [ArgumentDescription("This positional argument is common for all commands")]
+            public string SomeCommonPositionalArgument { get; set; }
         }
 
         public class CopyArgumentClass : CommandBaseClass
@@ -266,6 +276,10 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             Assert.That(_error.Length, Is.EqualTo(0));
             Assert.That(_output.Length, Is.GreaterThan(0));
 
+            Assert.That(_output.Count("StringComparison"), Is.EqualTo(3));
+            Assert.That(_output.Count("PositionalEnumWithoutDescription"), Is.EqualTo(2));
+            Assert.That(_output.Count("PositionalStringWithoutDescription"), Is.EqualTo(1));
+
             Assert.That(_output, Is.Not.Null);
             Assert.That(_output.Count("Move"), Is.EqualTo(1));
             Assert.That(_output.Count("Copy"), Is.EqualTo(1));
@@ -290,6 +304,7 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             Assert.That(output.Count("Move"), Is.EqualTo(1));
             Assert.That(output.Count("Copy"), Is.EqualTo(0));
             Assert.That(output.Count("-CommonBaseArgument"), Is.EqualTo(2));
+            Assert.That(output.Count("SomeCommonPositionalArgument"), Is.EqualTo(2));
         }
 
         [Test]
@@ -308,6 +323,7 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             Assert.That(output.Count("Move"), Is.EqualTo(0));
             Assert.That(output.Count("Copy"), Is.EqualTo(1));
             Assert.That(output.Count("-CommonBaseArgument"), Is.EqualTo(2));
+            Assert.That(output.Count("SomeCommonPositionalArgument"), Is.EqualTo(2));
         }
 
         [Test]
@@ -320,15 +336,15 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
 
             result = parser.FindCommandCommandLineParser("copy");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item2.GetType() == typeof (CommandLineParser<CopyArgumentClass>));
+            Assert.That(result.Item1.GetType() == typeof (CommandLineParser<CopyArgumentClass>));
 
             result = parser.FindCommandCommandLineParser("Where");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item2.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
+            Assert.That(result.Item1.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
 
             result = parser.FindCommandCommandLineParser("And");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item2.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
+            Assert.That(result.Item1.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
         }
 
         private static T ParseWithOutput<T>(string arguments) where T : class, new()
