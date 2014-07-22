@@ -173,6 +173,11 @@ namespace Miracle.Arguments
 			Parse(enumerator);
 		}
 
+	    /// <summary>
+	    /// Parse command
+	    /// </summary>
+	    /// <param name="enumerator">Args enumerator</param>
+	    /// <param name="more">Output parameter that indicates if there are more arguments to process</param>
 	    public object ParseCommand(IEnumerator enumerator, out bool more)
 	    {
 	        try
@@ -192,6 +197,10 @@ namespace Miracle.Arguments
 	        return parameterClass;
 	    }
 
+	    /// <summary>
+	    /// Parse command line
+	    /// </summary>
+	    /// <param name="enumerator">Args enumerator</param>
 	    public void Parse(IEnumerator enumerator)
 	    {
             int positionalArgumentIndex = 0;
@@ -504,22 +513,22 @@ InLoop:
 	        if (_commandArgument != null)
 	        {
                 writer.WriteLine();
-                var argumentName = (ArgumentNameAttribute)_commandArgument.Property.GetCustomAttributes(typeof(ArgumentNameAttribute), true).FirstOrDefault();
-                var name = argumentName != null ? argumentName.Names[0] : _commandArgument.Property.Name;
-                writer.Write(name);
-                writer.WriteLine(':');
-
                 var description = (ArgumentDescriptionAttribute)_commandArgument.Property.GetCustomAttributes(typeof(ArgumentDescriptionAttribute), true).FirstOrDefault();
                 if (description != null)
                 {
-                    WordWrap.WordWrapText(writer, description.Description, _argumentsSettings.HelpWidth - _argumentsSettings.HelpIndent, _argumentsSettings.HelpIndent);
+                    WordWrap.WordWrapText(writer, description.Description, _argumentsSettings.HelpWidth, 0);
                 }
-                writer.WriteLine();
-
+                
+                var argumentName = (ArgumentNameAttribute)_commandArgument.Property.GetCustomAttributes(typeof(ArgumentNameAttribute), true).FirstOrDefault();
+                var name = argumentName != null ? argumentName.Names[0] : _commandArgument.Property.Name;
+                writer.Write(name);
+                writer.WriteLine(" (Command):");
+ 
                 foreach (var group in _commandArgumentTypes.GroupBy(x => x.Value, x => x.Key))
                 {
                     var names = group.ToArray();
 
+                    writer.Write(new string(' ', _argumentsSettings.HelpIndent));
                     writer.Write(names[0]);
 
                     if (names.Length > 1)
@@ -528,8 +537,6 @@ InLoop:
                         writer.Write(String.Join("/", names.Skip(1)));
                         writer.Write(')');
                     }
-
-                    //group.Key.GenerateCommandHelp(writer);
 
                     writer.WriteLine();
                 }
@@ -555,31 +562,29 @@ InLoop:
 		    }
 		}
 
-        public void GenerateCommandHelp(TextWriter writer)
+        public void GenerateCommandHelp(TextWriter writer, string[] names)
         {
-            GenerateCommandLineHelp(writer, true);
             GenerateHelpDescription(writer);
+            writer.Write("Command: ");
+            writer.Write(names[0]);
+
+            if (names.Length > 1)
+            {
+                writer.Write(" (Alias: ");
+                writer.Write(String.Join("/", names.Skip(1)));
+                writer.Write(')');
+            }
+
+            GenerateCommandLineHelp(writer, true);
             GenerateDetailedCommandLineHelp(writer);
         }
 
         public void GenerateCommandHelp(TextWriter writer, string command)
         {
-            Tuple<string[], ICommandLineParser> cmdTuple = FindCommandCommandLineParser(command);
+            var cmdTuple = FindCommandCommandLineParser(command);
             if (cmdTuple != null)
             {
-                var names = cmdTuple.Item1;
-                var parser = cmdTuple.Item2;
-
-                writer.Write("Command: ");
-                writer.Write(names[0]);
-
-                if (names.Length > 1)
-                {
-                    writer.Write(" (Alias: ");
-                    writer.Write(String.Join("/", names.Skip(1)));
-                    writer.Write(')');
-                }
-                parser.GenerateCommandHelp(writer);
+                cmdTuple.Item1.GenerateCommandHelp(writer, cmdTuple.Item2);
                 writer.WriteLine();
             }
             else
@@ -588,7 +593,12 @@ InLoop:
             }
         }
 
-	    public Tuple<string[], ICommandLineParser> FindCommandCommandLineParser(string command)
+	    /// <summary>
+	    /// Find command by name in current parser or in any sub parsers.
+	    /// </summary>
+	    /// <param name="command">Name of command to find</param>
+	    /// <returns>Touple containg command parser and array of names associated with parser, or null if not found</returns>
+	    public Tuple<ICommandLineParser, string[]> FindCommandCommandLineParser(string command)
 	    {
             IEqualityComparer<string> equalityComparer = _argumentsSettings.GetStringComparer();
 	        IEnumerable<IGrouping<ICommandLineParser, string>> groups = _commandArgumentTypes.GroupBy(x => x.Value, x => x.Key);
@@ -598,7 +608,7 @@ InLoop:
                 var names = group.ToArray();
                 if (names.Any(x => equalityComparer.Equals(x, command)))
                 {
-                    return Tuple.Create(names, group.Key);
+                    return Tuple.Create(group.Key, names);
                 }
             }
 

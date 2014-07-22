@@ -14,6 +14,8 @@ namespace Miracle.Arguments
         /// </summary>
         /// <typeparam name="T">argument class type</typeparam>
         /// <param name="args">arguments to parse</param>
+        /// <param name="output">TextWriter where normal output is written to</param>
+        /// <param name="error">TextWriter where error output is written to</param>
         /// <returns>Parsed argument class or null in case of error</returns>
         public static T ParseCommandLine<T>(this string[] args, TextWriter output, TextWriter error)
             where T : class, new()

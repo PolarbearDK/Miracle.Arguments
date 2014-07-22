@@ -104,6 +104,7 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             public string To { get; set; }
 
             [ArgumentCommand(typeof(CriteriaArgumentClass), "Where")]
+            [ArgumentDescription("Example of a sub command with a description.")]
             public object[] MyCriteria { get; set; }
         }
 
@@ -279,7 +280,7 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             var parser = new CommandLineParser<TestArgumentClass>();
             var writer = new StringWriter();
 
-            parser.GenerateCommandHelp(writer,"Move");
+            parser.GenerateCommandHelp(writer, "Move");
             var output = writer.ToString();
 
             Console.WriteLine("Output (length {0}):", output.Length);
@@ -288,6 +289,24 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
             Assert.That(output, Is.Not.Null);
             Assert.That(output.Count("Move"), Is.EqualTo(1));
             Assert.That(output.Count("Copy"), Is.EqualTo(0));
+            Assert.That(output.Count("-CommonBaseArgument"), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void CommandHelpForCommand2Test()
+        {
+            var parser = new CommandLineParser<TestArgumentClass>();
+            var writer = new StringWriter();
+
+            parser.GenerateCommandHelp(writer, "copy");
+            var output = writer.ToString();
+
+            Console.WriteLine("Output (length {0}):", output.Length);
+            Console.WriteLine(output);
+
+            Assert.That(output, Is.Not.Null);
+            Assert.That(output.Count("Move"), Is.EqualTo(0));
+            Assert.That(output.Count("Copy"), Is.EqualTo(1));
             Assert.That(output.Count("-CommonBaseArgument"), Is.EqualTo(2));
         }
 

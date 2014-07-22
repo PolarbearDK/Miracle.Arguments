@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Miracle.Arguments
 {
+    /// <summary>
+    /// Command line argument that can't be processed by current parser, but might be processed by another parser.
+    /// </summary>
     public class RetryableCommandLineArgumentException : CommandLineParserException
     {
         /// <summary>

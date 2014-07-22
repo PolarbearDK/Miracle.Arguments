@@ -9,7 +9,7 @@
 		<projectUrl>https://github.com/PolarbearDK/Miracle.Arguments</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
-		<releaseNotes>Initial version.</releaseNotes>
+		<releaseNotes>Improve automatic help generation.</releaseNotes>
 		<copyright>Copyright 2008-2014</copyright>
 		<tags>commandline command line parser argument annotation attribute</tags>
 	</metadata>
