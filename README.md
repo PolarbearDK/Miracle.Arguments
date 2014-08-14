@@ -5,6 +5,7 @@ Simple annotation based command line parser with automatic help generation.
 
 Sample usage:
 
+```csharp
 using System;
 using Miracle.Arguments;
 
@@ -46,5 +47,6 @@ namespace Samples
         }
     }
 }
+```
 
 Se sample applications and/or unit tests for more complex usage.
