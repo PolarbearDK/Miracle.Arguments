@@ -9,8 +9,16 @@
 		<projectUrl>https://github.com/PolarbearDK/Miracle.Arguments</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>$description$</description>
-		<releaseNotes>Improve automatic help generation.</releaseNotes>
+		<releaseNotes>Add additional targets (.NET 3.5 and .NET 4.5)</releaseNotes>
 		<copyright>Copyright 2008-2014</copyright>
 		<tags>commandline command line parser argument annotation attribute</tags>
 	</metadata>
+	<files>
+		<file src="bin\Release\net35\Miracle.Arguments.dll" target="lib\net35\Miracle.Arguments.dll" />
+		<file src="bin\Release\net35\Miracle.Arguments.xml" target="lib\net35\Miracle.Arguments.xml" />
+		<file src="bin\Release\net4\Miracle.Arguments.dll" target="lib\net4\Miracle.Arguments.dll" />
+		<file src="bin\Release\net4\Miracle.Arguments.xml" target="lib\net4\Miracle.Arguments.xml" />
+		<file src="bin\Release\net45\Miracle.Arguments.dll" target="lib\net45\Miracle.Arguments.dll" />
+		<file src="bin\Release\net45\Miracle.Arguments.xml" target="lib\net45\Miracle.Arguments.xml" />
+	</files>
 </package>
