@@ -336,15 +336,15 @@ Help for individual commands are available through [ArgumentCommandHelp].")]
 
             result = parser.FindCommandCommandLineParser("copy");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item1.GetType() == typeof (CommandLineParser<CopyArgumentClass>));
+            Assert.That(result.Parser.GetType() == typeof (CommandLineParser<CopyArgumentClass>));
 
             result = parser.FindCommandCommandLineParser("Where");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item1.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
+            Assert.That(result.Parser.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
 
             result = parser.FindCommandCommandLineParser("And");
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Item1.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
+            Assert.That(result.Parser.GetType() == typeof(CommandLineParser<CriteriaArgumentClass>));
         }
 
         private static T ParseWithOutput<T>(string arguments) where T : class, new()

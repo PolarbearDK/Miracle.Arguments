@@ -40,7 +40,7 @@ namespace Miracle.Arguments
         /// Find command by name in current parser or in any sub parsers.
         /// </summary>
         /// <param name="command">Name of command to find</param>
-        /// <returns>Touple containg command parser and array of names associated with parser, or null if not found</returns>
-        Tuple<ICommandLineParser, string[]> FindCommandCommandLineParser(string command);
+        /// <returns>Command match containg command parser and array of names associated with parser, or null if not found</returns>
+        CommandMatch FindCommandCommandLineParser(string command);
     }
 }

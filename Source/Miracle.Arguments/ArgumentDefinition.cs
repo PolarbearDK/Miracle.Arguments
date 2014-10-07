@@ -30,9 +30,12 @@ namespace Miracle.Arguments
 			if(conversionType.IsEnum)
 				return Enum.Parse(conversionType, value, true);
 
-            if (conversionType == typeof(Guid))
+		    if (conversionType == typeof (Guid))
+#if NET35
+		        return new Guid(value);
+#else
                 return Guid.Parse(value);
-
+#endif
             if (conversionType == typeof(TimeSpan))
                 return TimeSpan.Parse(value);
 

@@ -188,7 +188,7 @@ namespace Miracle.Arguments
                     if (names.Length > 1)
                     {
                         writer.Write(" (Alias: ");
-                        writer.Write(String.Join("/", names.Skip(1)));
+                        writer.Write(String.Join("/", names.Skip(1).ToArray()));
                         writer.Write(')');
                     }
 
@@ -238,7 +238,7 @@ namespace Miracle.Arguments
             if (names.Length > 1)
             {
                 writer.Write(" (Alias: ");
-                writer.Write(String.Join("/", names.Skip(1)));
+                writer.Write(String.Join("/", names.Skip(1).ToArray()));
                 writer.Write(')');
             }
 
@@ -253,10 +253,10 @@ namespace Miracle.Arguments
         /// <param name="command">command to find</param>
         public void GenerateCommandHelp(TextWriter writer, string command)
         {
-            var cmdTuple = FindCommandCommandLineParser(command);
-            if (cmdTuple != null)
+            var commandMatch = FindCommandCommandLineParser(command);
+            if (commandMatch != null)
             {
-                cmdTuple.Item1.GenerateCommandHelp(writer, cmdTuple.Item2);
+                commandMatch.Parser.GenerateCommandHelp(writer, commandMatch.Aliases);
             }
             else
             {
@@ -268,8 +268,8 @@ namespace Miracle.Arguments
         /// Find command by name in current parser or in any sub parsers.
         /// </summary>
         /// <param name="command">Name of command to find</param>
-        /// <returns>Touple containg command parser and array of names associated with parser, or null if not found</returns>
-        public Tuple<ICommandLineParser, string[]> FindCommandCommandLineParser(string command)
+        /// <returns>Command match containg command parser and array of names associated with parser, or null if not found</returns>
+        public CommandMatch FindCommandCommandLineParser(string command)
         {
             IEqualityComparer<string> equalityComparer = _argumentsSettings.GetStringComparer();
             IEnumerable<IGrouping<ICommandLineParser, string>> groups = _commandArgumentTypes.GroupBy(x => x.Value, x => x.Key);
@@ -279,7 +279,7 @@ namespace Miracle.Arguments
                 var names = group.ToArray();
                 if (names.Any(x => equalityComparer.Equals(x, command)))
                 {
-                    return Tuple.Create(group.Key, names);
+                    return new CommandMatch(group.Key, names);
                 }
             }
 
