@@ -1,115 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9345596F-E6F0-4074-959E-1613AEEAA2F8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Miracle.Arguments</RootNamespace>
-    <AssemblyName>Miracle.Arguments</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
-    <SccProjectName>%24/Internal/Miracle.Components/4.0/Miracle.Arguments</SccProjectName>
-    <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>http://tfs:8080</SccAuxPath>
-    <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net462;netstandard2.0;net45;net452;net46;net461</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Miracle.Arguments</DocumentationFile>
+    <Version>3.1.1</Version>
+    <Authors>Philip Hoppe</Authors>
+    <Company>Miracle A/S</Company>
+    <PackageLicenseUrl>https://github.com/PolarbearDK/Miracle.Arguments/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/PolarbearDK/Miracle.Arguments</PackageProjectUrl>
+    <Description>Simple attribute based command line parser.</Description>
+    <Copyright>Copyright © Philip Hoppe, Miracle A/S 2008-2018</Copyright>
+    <PackageTags>commandline command line shell cli parser parsing argument option annotation attribute library</PackageTags>
+    <PackageReleaseNotes>Add support for most framework versions including .net standard 2.0</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://github.com/PolarbearDK/Miracle.Arguments/raw/master/nuget-icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/PolarbearDK/Miracle.Arguments</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+
+  <!-- .NET Standard references, compilation flags and build options -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD1_6</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release 3.5|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net35</OutputPath>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <DefineConstants>TRACE;NET35</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\net35\Miracle.Arguments.XML</DocumentationFile>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release 4.0|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net4</OutputPath>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <DefineConstants>TRACE;NET4</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\net4\Miracle.Arguments.XML</DocumentationFile>
+
+  <!-- .NET 4.x references, compilation flags and build options -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net45'">
+    <DefineConstants>NETFULL;NET45</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release 4.5|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\net45</OutputPath>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <DefineConstants>TRACE;NET45</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>bin\Release\net45\Miracle.Arguments.XML</DocumentationFile>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net452'">
+    <DefineConstants>NETFULL;NET45;NET452</DefineConstants>
   </PropertyGroup>
-  <ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
+    <DefineConstants>NETFULL;NET46</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+    <DefineConstants>NETFULL;NET46;NET461</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+    <DefineConstants>NETFULL;NET46;NET462</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard1.6' AND '$(TargetFramework)' != 'netstandard2.0'">
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ArgumentAttribute.cs" />
-    <Compile Include="CommandLineParser.Help.cs" />
-    <Compile Include="CommandLineParserException.cs" />
-    <Compile Include="CommandLineParserExtensions.cs" />
-    <Compile Include="CommandMatch.cs" />
-    <Compile Include="DuplicateArgumentBehaviour.cs" />
-    <Compile Include="ICommandLineParser.cs" />
-    <Compile Include="NamedArgument.cs" />
-    <Compile Include="ArgumentDefinition.cs" />
-    <Compile Include="ArgumentDefinitionException.cs" />
-    <Compile Include="ArgumentDefinitionFactory.cs" />
-    <Compile Include="ArgumentSettingsAttribute.cs" />
-    <Compile Include="CommandLineParser.cs" />
-    <Compile Include="IArgumentDefinition.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetryableCommandLineArgumentException.cs" />
-    <Compile Include="WordWrap.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Miracle.Arguments.nuspec" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-    <!-- Load up the information from the assembly -->
-    <GetAssemblyIdentity AssemblyFiles="$(OutputPath)$(AssemblyName).dll">
-      <Output TaskParameter="Assemblies" ItemName="OutputAssemblyInfo" />
-    </GetAssemblyIdentity>
-    <Message Text="Info: %(OutputAssemblyInfo.Version)" />
-  </Target>
-  <Target Name="Package">
-    <!-- Ensure the Package directory exists for this project -->
-    <RemoveDir Directories="NuGet" />
-    <MakeDir Directories="NuGet" />
-    <!-- Package the project -->
-    <Exec WorkingDirectory="$(BuildDir)" Command="..\..\NuGet\NuGet.exe pack -Verbosity detailed -OutputDir &quot;NuGet&quot; -Version %(OutputAssemblyInfo.Version) -Properties &quot;Configuration=$(Configuration)&quot;" />
-  </Target>
 </Project>
+
