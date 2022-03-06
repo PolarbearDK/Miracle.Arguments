@@ -1,59 +1,54 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net462;netstandard2.0;net45;net452;net46;net461</TargetFrameworks>
-    <LangVersion>latest</LangVersion>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Miracle.Arguments</DocumentationFile>
-    <Version>3.1.1</Version>
-    <Authors>Philip Hoppe</Authors>
-    <Company>Miracle A/S</Company>
-    <PackageLicenseUrl>https://github.com/PolarbearDK/Miracle.Arguments/raw/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/PolarbearDK/Miracle.Arguments</PackageProjectUrl>
-    <Description>Simple attribute based command line parser.</Description>
-    <Copyright>Copyright © Philip Hoppe, Miracle A/S 2008-2018</Copyright>
-    <PackageTags>commandline command line shell cli parser parsing argument option annotation attribute library</PackageTags>
-    <PackageReleaseNotes>Add support for most framework versions including .net standard 2.0</PackageReleaseNotes>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIconUrl>https://github.com/PolarbearDK/Miracle.Arguments/raw/master/nuget-icon.png</PackageIconUrl>
-    <RepositoryUrl>https://github.com/PolarbearDK/Miracle.Arguments</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net462;net472;net48;netstandard2.1</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Miracle.Arguments</DocumentationFile>
+		<Version>3.1.1</Version>
+		<Authors>Philip Hoppe</Authors>
+		<Company>Miracle A/S</Company>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/PolarbearDK/Miracle.Arguments</PackageProjectUrl>
+		<Description>Simple attribute based command line parser.</Description>
+		<Copyright>Copyright © Philip Hoppe, Miracle A/S 2008-2022</Copyright>
+		<PackageTags>commandline command line shell cli parser parsing argument option annotation attribute library</PackageTags>
+		<PackageReleaseNotes>Upgrad frameworks to supported versions.</PackageReleaseNotes>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageIcon>nuget-icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/PolarbearDK/Miracle.Arguments</RepositoryUrl>
+		<RepositoryType>GitHub</RepositoryType>
+	</PropertyGroup>
 
-  <!-- .NET Standard references, compilation flags and build options -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD1_6</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_0</DefineConstants>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Include="nuget-icon.png" Pack="true" PackagePath="\" />
+	</ItemGroup>
+	
+	<!-- .NET Standard references, compilation flags and build options -->
+	<PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<DefineConstants>NETCORE;NETSTANDARD;NETSTANDARD2_1</DefineConstants>
+	</PropertyGroup>
 
-  <!-- .NET 4.x references, compilation flags and build options -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net45'">
-    <DefineConstants>NETFULL;NET45</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net452'">
-    <DefineConstants>NETFULL;NET45;NET452</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net46'">
-    <DefineConstants>NETFULL;NET46</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
-    <DefineConstants>NETFULL;NET46;NET461</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
-    <DefineConstants>NETFULL;NET46;NET462</DefineConstants>
-  </PropertyGroup>
+	<!-- .NET 4.x references, compilation flags and build options -->
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+		<DefineConstants>NETFULL;NET462</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net472'">
+		<DefineConstants>NETFULL;NET472</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+		<DefineConstants>NETFULL;NET48</DefineConstants>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard1.6' AND '$(TargetFramework)' != 'netstandard2.0'">
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.1'">
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="Microsoft.CSharp" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="4.0.0-beta0014">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GitVersion.MsBuild" Version="5.8.3">
+			<PrivateAssets>all</PrivateAssets>
+			<!--<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>-->
+		</PackageReference>
+	</ItemGroup>
 </Project>
 
