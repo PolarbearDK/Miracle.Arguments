@@ -137,20 +137,29 @@ namespace Miracle.Arguments
 		/// </summary>
 		public string HelpExecutableName
 		{
-			get {
-			    var entryAssembly = Assembly.GetEntryAssembly();        
-			    return _helpExecutableName 
+			get
+            {
+                var entryAssembly = Assembly.GetEntryAssembly();
+                return _helpExecutableName
                     ?? (entryAssembly != null
-                        ? entryAssembly.ManifestModule.Name
+                        ? GetExeName(entryAssembly)
                         : "Unit test");
-			}
-			set { _helpExecutableName = value; }
+            }
+            set { _helpExecutableName = value; }
 		}
 
-		/// <summary>
-		/// Width of help 
-		/// </summary>
-		public int HelpWidth
+        private static string GetExeName(Assembly entryAssembly)
+        {
+            var name = entryAssembly.ManifestModule.Name;
+            return name.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase) 
+				? name.Substring(0, name.Length - 4) + ".exe" 
+				: name;
+        }
+
+        /// <summary>
+        /// Width of help 
+        /// </summary>
+        public int HelpWidth
 		{
 			get { return _helpWidth; }
 			set { _helpWidth = value; }
