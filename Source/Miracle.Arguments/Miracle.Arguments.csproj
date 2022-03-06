@@ -5,20 +5,25 @@
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Miracle.Arguments</DocumentationFile>
 		<Version>3.1.1</Version>
 		<Authors>Philip Hoppe</Authors>
-		<Company>Miracle A/S</Company>
+		<Company>Danish Software Development</Company>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/PolarbearDK/Miracle.Arguments</PackageProjectUrl>
 		<Description>Simple attribute based command line parser.</Description>
-		<Copyright>Copyright © Philip Hoppe, Miracle A/S 2008-2022</Copyright>
+		<Copyright>Copyright © Philip Hoppe, Danish Software Development 2008-2022</Copyright>
 		<PackageTags>commandline command line shell cli parser parsing argument option annotation attribute library</PackageTags>
-		<PackageReleaseNotes>Upgrad frameworks to supported versions.</PackageReleaseNotes>
+		<PackageReleaseNotes>Upgrad frameworks to supported versions. Switched to MIT licence. Fixed cosmetic bug where command help showed .dll not .exe (.NET core only).</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageIcon>nuget-icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/PolarbearDK/Miracle.Arguments</RepositoryUrl>
 		<RepositoryType>GitHub</RepositoryType>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Include="..\..\README.md">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="nuget-icon.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
 	

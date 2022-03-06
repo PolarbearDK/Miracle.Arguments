@@ -3,7 +3,15 @@ Miracle.Arguments
 
 Simple annotation based command line parser with automatic help generation.
 
-Sample usage:
+## Usage
+
+Available as a NuGet package: [Miracle.Arguments](https://www.nuget.org/packages/Miracle.Arguments/)
+
+```
+Install-Package Miracle.Arguments -Version 6.0.0
+```
+
+## Sample usage
 
 ```csharp
 using System;
@@ -50,3 +58,6 @@ namespace Samples
 ```
 
 Se sample applications and/or unit tests for more complex usage.
+
+## Fun fact
+I have used this code/nuget **without code changes** for more that 10 years! It's rock solid. ;)
